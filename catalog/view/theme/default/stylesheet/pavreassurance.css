@@ -1,0 +1,52 @@
+ .free-test-theme{
+	 color:red;
+	 font-size: 20px;
+	 font-weight: bold;
+	 line-height: 25px;
+	float: left;
+
+
+
+}
+
+ .fa-truck{
+	background: #CF7EA9;
+	 font-size: 70px;
+	text-align: center;
+	 margin-right: 10px;
+	 float: left;
+	 padding: 15px 15px 15px 15px;
+ }
+
+ .description{
+	 font-size: 16px;
+	 font-weight: bold;
+ }
+
+ .fa-long-arrow-right{
+	 font-size: 10px;
+	 color: yellow;
+
+ }
+
+ .fa-money{
+	 color: blue;
+	 background: #CF7EA9;
+	 font-size: 70px;
+	 text-align: center;
+	 margin-right: 10px;
+	 float: left;
+	 padding: 15px 15px 15px 15px;
+ }
+ h4{
+	 font-weight: bold;
+ }
+ .fa-users{
+	 color: black;
+	 background: #CF7EA9;
+	 font-size: 70px;
+	 text-align: center;
+	 margin-right: 10px;
+	 float: left;
+	 padding: 15px 15px 15px 15px;
+ }

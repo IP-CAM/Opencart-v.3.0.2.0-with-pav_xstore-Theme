@@ -1,0 +1,57 @@
+{% set id = random(1..9) + random() %}
+<div class="pavo-widget-instagram {{settings.extra_class}}">
+    {% if settings.title %}
+    <h3 class="content-title">{{ settings.title }}</h3>
+    {% endif %}
+    {% if settings.subtitle %}
+    <div class="content-subtitle">{{ settings.subtitle }}</div>
+    {% endif %}
+    <div id="instag{{ id }}">
+        <div id="instafeed" class="owl-carousel"></div>
+    </div>
+</div>
+{% set template = '<div class="item"><a href="{{link}}" target="_blank" id="{{id}}"><img src="{{image}}" class="img-responsive"/><i class="{{model.icon_type}}"></i><div class="footer"><div class="inner"><div class="caption">{{model.short_caption}}</div><div class="likes"><i class="fa fa-heart-o"></i> {{likes}}</div><div class="comments"><i class="fa fa-comment-o"></i> {{comments}}</div></div></div></a></div>' %}
+{% if settings.user_id and settings.client_id and settings.access_token %}
+<script type="text/javascript">
+(function($){
+    $(document).ready(function(){
+        var userFeed = new Instafeed({
+            get: 'user',
+            userId: '{{settings.user_id}}',
+            clientId: '{{settings.client_id}}',
+            accessToken: '{{settings.access_token}}',
+            sortBy: '{{settings.sortby}}',
+            limit: {{settings.limit ? settings.limit : 5}},
+            filter: function(image) {
+                var MAX_LENGTH = {{settings.text_length}};
+                if (image.caption && image.caption.text) {
+                    if (image.caption.text.length > MAX_LENGTH){
+                        image.short_caption = image.caption.text.slice(0, MAX_LENGTH)+"...";
+                    } else {
+                        image.short_caption = image.caption.text.slice(0, MAX_LENGTH);
+                    }
+                } else {
+                    image.short_caption = "";
+                }
+                if (image.type == "video") {
+                    image.icon_type = "fa fa-video-camera";
+                } else {
+                    image.icon_type = "";
+                }
+                return true;
+            },
+            template: '{{ template }}',
+            resolution: '{{settings.image_size}}',
+            after: function () {
+                setTimeout(function(){
+                    $('#instafeed').owlCarousel( {{ settings.carousel|json_encode() }} );
+                }, 200);
+            },
+        });
+        if ($('#instafeed').length) {
+            userFeed.run();
+        }
+    });
+})(jQuery);
+</script>
+{% endif %}

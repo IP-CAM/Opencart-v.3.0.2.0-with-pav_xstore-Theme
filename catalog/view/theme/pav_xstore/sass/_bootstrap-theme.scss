@@ -1,0 +1,89 @@
+ul,
+ol {
+	list-style: none;
+}
+
+.form-control {
+  @include placeholder-font-family($font-family-base);
+  @include box-shadow(none);
+  height: auto;
+  &:focus {
+    border: 1px solid $border-color;
+    @include box-shadow(none);
+  }
+}
+#search{
+   .input-lg {
+      height: 40px;
+      line-height: 20px;
+      padding: 0 10px;
+   }
+   .btn-lg {
+      font-size: 15px;
+      line-height: 18px;
+      padding: 10px 20px;
+      text-shadow: 0 1px 0 #FFF;
+   }
+   .btn-lg{
+      &:hover{
+        color: #355c7d;
+      }
+   }
+}
+
+.btn-group.open .dropdown-toggle {
+  @include box-shadow(none);
+}
+.dropdown-menu {
+	padding: 20px 10px;
+  min-width: 170px;
+}
+input[type="radio"],
+input[type="checkbox"] {
+ // margin: 2px 0 0;
+}
+.radio + .radio,
+.checkbox + .checkbox {
+  margin-top: inherit; // Move up sibling radios or checkboxes for tighter spacing
+}
+.buttons {
+  overflow: hidden;
+  clear: both;
+  margin: 20px 0;
+}
+.container-fluid {
+    padding: 0;
+}
+.alert {
+  overflow: hidden;
+}
+//button\
+button {
+  background: transparent;
+  border: none;
+  &:hover {
+    color: $theme-color;
+  }
+}
+.btn {
+  &:active,
+  &.active {
+    @include box-shadow(none);
+  }
+}
+.btn-link {
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: none;
+  }
+}
+// Links
+a {
+  color: $link-color;
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    color: $link-hover-color;
+    text-decoration: none;
+  }
+}

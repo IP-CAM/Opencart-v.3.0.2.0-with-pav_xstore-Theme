@@ -1,0 +1,123 @@
+@media (min-width: $screen-lg){
+
+}
+/*$media (max-width: 1199px)*/
+@media (max-width: $screen-md-max){
+    
+}
+/*$media (min-width: 992px) and (max-width: 1199px)*/
+@media (min-width: $screen-md) and (max-width: $screen-md-max){
+    
+}
+/*$media (min-width: 991px)*/
+@media (min-width: $screen-sm-max){
+	
+}      
+/*$media(max-width:991px)*/
+@media(max-width: $screen-sm-max){
+    
+}
+/*$media (min-width: 768px) and (max-width: 991px)*/
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+/*$media (min-width: 768px) */
+@media (min-width: $screen-sm) {
+	#column-left, #column-right {
+	    .product-thumb {
+	        .image {
+	            @include rtl-float-left();
+	            width: 35%;
+	            padding: 0;
+	            &:before{
+	                content:none;
+	            }
+	        }
+	        .product-meta {
+	            @include rtl-padding(0,0,0,15px);
+	            @include rtl-float-left();
+	            @include rtl-text-align-left();
+	            width: 65%;
+	        }
+	            .caption {
+	            	padding-top: 5px;
+	            }
+	    }
+	}
+	.navbar {
+		margin: 0px;
+	}
+	
+    .layout-home {
+    	.header-buttom {
+			z-index: 99;
+			position: relative;
+		}
+    } 
+    .layerslider-wrapper {
+    	margin-top: -67px;
+    }
+	.form-horizontal .control-label {
+	    @include rtl-text-align-left();
+	}
+}
+/*$media (min-width: 767px)*/
+@media (min-width: $screen-xs-max) {
+	.product-list {
+		.product-thumb {
+			.image {
+			    @include rtl-float-left();
+			    width: 35%;
+			}
+			.product-meta {
+			    @include rtl-padding-left(15px);
+				@include rtl-float-left();
+				width: 65%;
+				.caption{
+					.name {a {font-size: $font-size-base + 2;} }
+				}
+			}
+			.description {
+				display: block;
+			}
+		}
+	}
+}
+/*$media (max-width: 767px)*/
+@media (max-width: $screen-xs-max) {
+	header{
+	    padding: 25px 0;
+	}
+	.navbar-nav {
+		margin: 0px;
+		.open {
+			.dropdown-menu {
+				background-color: rgba(231, 231, 231, 0.3);
+				padding: 15px 20px;
+				li {
+					padding-bottom: 10px;
+				}
+			}
+		}
+	}
+	.btn-lg {
+	    background-color: #e7e7e7;
+	    margin-bottom: 20px;
+	}
+	.navbar-header {	
+		border-radius: 4px;
+		background-color: rgba(53, 92, 125, 0.9);
+		button {color: $white;}
+	}
+}
+/*$media (max-width: 480px)*/
+@media (max-width: $screen-xs) {
+	#logo {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+/*$media (max-width: 320px)*/
+@media (max-width: 320px) {
+    
+}

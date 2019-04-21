@@ -1,0 +1,47 @@
+
+.pav-newsletter {
+	h3 {
+		font-size: $font-size-h1;
+	}
+	.description-top {
+		font-size: $font-size-base;
+		color: #888888;
+		font-family: $font-family-serif;
+		font-weight: 400;
+	}
+
+	.form-group {
+		margin-top: 25px;
+		position: relative;
+		.form-control {
+	    	height: 55px;
+	    	background: #f3f3f3;
+	    	border:none;
+	    	@include border-radius(5px !important);
+	    }
+		.btn {
+			position: absolute;
+			@include rtl-right(10px);
+			top: 10px;
+			width: auto;
+			z-index: 5;
+			background-color: $brand-primary;	
+			color: $white;
+			font-weight: bold;
+			border: none;
+			border-radius: 5px;
+			font-size: $font-size-base;
+			&:hover {
+				box-shadow: 0 0 0 22px #2a3e55 inset;
+			}
+		}
+	}
+}
+.valid{
+    position: absolute;
+    width: 100%;	
+    left: 0;
+    right: 0;
+    margin-top: 35px;
+    z-index: 9999;
+}

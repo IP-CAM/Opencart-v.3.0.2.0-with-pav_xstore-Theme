@@ -1,0 +1,33 @@
+<div class="pav-newsletter {{ prefix }} pav-newsletter" id="newsletter_{{ id }}" data-mode="{{ mode }}">
+		<form id="formNewLestter" method="post" action="{{ action }}" class="formNewLestter newsletter-bg" {% if banner is not empty%} style="background-image: url('{{ banner }}')" {% endif %}>
+			<div class="inner clearfix">
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 contents">
+					<h3 >{{ entry_newsletter }}</h3>
+					<div class="description-top">
+						<p>{{ description }}</p>
+					</div>
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+					<div class="form-group">
+						<input type="text" class="form-control input-md inputNew" {% if customer_email is not defined %} onblur="javascript:if(this.value=='')this.value='{{ default_input_text }}';" onfocus="javascript:if(this.value=='{{ default_input_text }}')this.value='';"{% endif %} value="{{ customer_email? customer_email : default_input_text }}" size="18" name="email">
+						<button type="submit" name="submitNewsletter" class="btn btn-danger">{{ button_subscribe }}</button>
+					<div class="valid"></div>	
+					</div>
+				</div>	
+				<input type="hidden" value="1" name="action">
+				<div class="description-bottom">
+					{{ social }}
+				</div>
+			</div>
+		</form>
+</div>
+
+<script>
+	(function($){
+		$(document).ready(function(){
+			$("#newsletter_{{ id }}").pavoNewsletter({
+			    message: '{{ valid_email }}'
+			});
+		});
+	})(jQuery);
+</script>

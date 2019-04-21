@@ -1,0 +1,67 @@
+<div class="box blogcategory-{{ name }}">
+    <div class="box-heading">{{ heading_title }}</div>
+    <div class="box-content" id="pavo-blogcategory">
+        <div class="pav-category tree-menu">
+            <ul id="accordion" class="box-category list-group accordion">
+                {% for category1 in category %}
+                {% if category1.parent_id == 0 %}   
+                <li>
+                    <a href="{{ category1.link }}" >{{ category1.name }} {% set count = 0 %}
+                        {% for cat_id in get_category %}
+                        {% if cat_id.category_id == category1.category_id %}
+                        {% set count = count + 1 %}
+                        {% endif %}
+                        {% endfor %}
+                        ({{ count }})
+                    </a>
+                    <span class="accordion-heading pull-right" data-toggle="collapse" data-parent="#accordion{{category1.category_id}}" href="#collapse{{category1.category_id}}"><i class="fa fa-angle-right"></i>
+                    </span>
+                    {% endif %}
+                    <ul id="collapse{{category1.category_id}}" class="children accordion-body collapse">
+                        {% for category2 in categorys %}
+                        {% if category2.parent_id == category1.category_id %}
+                        <li>
+                            <a href="{{ category2.link }}" >{{ category2.name }} {% set count = 0 %}
+                                {% for cat_id in get_category %}
+                                {% if cat_id.category_id == category2.category_id %}
+                                {% set count = count + 1 %}
+                                {% endif %}
+                                {% endfor %}
+                                ({{ count }})
+                            </a>
+                        </li>
+                        <ul id="collapse{{category1.category_id}}" class="children accordion-body">
+                            {% for category3 in categorys %}
+                            {% if (category3.parent_id == category2.category_id) and (category2.parent_id == category1.category_id) %}
+                            <li>
+                                <a href="{{ category3.link }}" >{{ category3.name }} {% set count = 0 %}
+                                    {% for cat_id in get_category %}
+                                    {% if cat_id.category_id == category3.category_id %}
+                                    {% set count = count + 1 %}
+                                    {% endif %}
+                                    {% endfor %}
+                                    ({{ count }})
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %} 
+                        </ul>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.collapse').on('show.bs.collapse', function () {
+            $('span[href=#'+$(this).attr('id')+']').html("<i class='fa fa-angle-down'></i>");
+        });
+        $('.collapse').on('hide.bs.collapse', function () {
+            $('span[href=#'+$(this).attr('id')+']').html("<i class='fa fa-angle-right'></i>");
+        });
+    });
+</script>

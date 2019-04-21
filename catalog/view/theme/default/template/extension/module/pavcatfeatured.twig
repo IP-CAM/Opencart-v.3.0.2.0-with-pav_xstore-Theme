@@ -1,0 +1,80 @@
+{% set id = random(1..9) + random() %}
+{% if categories is defined %}
+<div class="panel panel-default categoryfeature {{layout_style}} {{ prefix }}">
+  <div class="panel-heading">
+    {% if titles == 1 %}
+    <h3 class="panel-title">{{ box_heading }}</h3>
+    {% endif %}
+    {% if description %}
+    <span>{{ description }}</span>
+    {% endif %}
+  </div>
+  <div class="panel-body">
+    <div class="{% if categories|length <= perview*rows and loop == 'false' %}swiper-no-swiping{% endif %}">
+      <div class="row swiper-container swiper-containers catfeatured{{id}}">
+        <div class="swiper-wrapper">
+          {% for category in categories %}
+          <div class="swiper-slide "> 
+            <div class="product-thumb transition">
+              <a href="{{ category.href }}">
+                <div class="effect-v10">
+                  <div class="image text-center">
+                    {% if showimg %}
+                    <i class="{{ category.icon }}"></i>
+                    {% else %}
+                    <img src="{{ category.thumb }}" alt="{{ category.name }}" title="{{ category.name }}"/>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="caption text-center {{ category.class }}">
+                  <span>{{ category.name }}</span>
+                  <span class="count-items">{{ category.items }}</span>
+                </div>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="swiper-pager">
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next swiper-button-next{{id}}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<script><!--
+$('.catfeatured{{id}}').swiper({
+  pause: 'hover',
+  nextButton: '.swiper-button-next',
+  prevButton: '.swiper-button-prev',
+  slidesPerView: {{ perview ? perview : 2 }},
+  loop:{{ loop ? loop : 'false' }},
+  autoplay:{{ auto_play_mode == "true" ? interval:'false' }},
+  noSwipingClass: 'swiper-no-swiping',
+  slidesPerColumn:{{ rows ? rows : 1 }},
+  spaceBetween: 0,
+  {% if loop != "true" %}
+  onReachEnd:function(swiper){
+    $('.swiper-button-next{{id}}').one('click',function () {
+      swiper.slideTo(0, 800, false);
+    });
+  },
+  {% endif %}
+  breakpoints: {
+    767: {
+      slidesPerView: 1,
+      {% if categories|length > 1*rows %}
+      noSwiping: false
+      {% endif %}
+    },
+    991: {
+      slidesPerView: 2,
+      {% if categories|length > 2*rows %}
+      noSwiping: false
+      {% endif %}
+    }, 
+  }
+});
+--></script>

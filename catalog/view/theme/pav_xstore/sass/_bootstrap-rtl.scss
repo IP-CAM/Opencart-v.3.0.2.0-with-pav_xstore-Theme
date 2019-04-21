@@ -1,0 +1,44 @@
+// --------------------------------------------------
+// Right-to-Left (RTL) Theme for Bootstrap > 3.3.6
+// --------------------------------------------------
+
+// Core variables and mixins imported from the latest original bootstrap
+@import 'bootstrap/_variables.scss';
+@import 'bootstrap-rtl/variables';
+@import 'bootstrap-rtl/mixins';
+
+// Reset and dependencies
+@import 'bootstrap-rtl/normalize';
+
+// Core CSS
+@import 'bootstrap-rtl/style';
+@import 'bootstrap-rtl/responsive';
+@import 'bootstrap-rtl/type';
+@import 'bootstrap-rtl/grid';
+@import 'bootstrap-rtl/tables';
+@import 'bootstrap-rtl/forms';
+
+// Components
+@import 'bootstrap-rtl/dropdowns';
+@import 'bootstrap-rtl/button-groups';
+@import 'bootstrap-rtl/input-groups';
+@import 'bootstrap-rtl/navs';
+@import 'bootstrap-rtl/navbar';
+@import 'bootstrap-rtl/pagination';
+@import 'bootstrap-rtl/pager';
+@import 'bootstrap-rtl/badges';
+@import 'bootstrap-rtl/alerts';
+@import 'bootstrap-rtl/progress-bars';
+@import 'bootstrap-rtl/media';
+@import 'bootstrap-rtl/list-group';
+@import 'bootstrap-rtl/panels';
+@import 'bootstrap-rtl/responsive-embed';
+@import 'bootstrap-rtl/close';
+
+// Components w/ JavaScript
+@import 'bootstrap-rtl/modals';
+@import 'bootstrap-rtl/popovers';
+@import 'bootstrap-rtl/carousel';
+
+// Utility classes
+@import 'bootstrap-rtl/utilities';

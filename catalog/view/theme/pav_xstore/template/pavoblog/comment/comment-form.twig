@@ -1,0 +1,62 @@
+<h3>{{ text_leave_comment }}</h3>
+{% if ( errors.comment_warning ) %}
+	<div class="pavoblog-notice warning">{{ errors.comment_warning }}</div>
+{% endif %}
+<form action="{{ comment_action }}" method="post" id="comment-form" class="comment-form{{ captcha ? ' google-recaptcha' : '' }}">
+	<div class="row">
+		<div class="col-md-12 col-xs-12">
+			<input type="text" name="comment_title" class="pavo-form-control" placeholder="{{ text_comment_title }}" value="{{ comment_title }}" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-xs-12{{ errors.comment_text ? ' has-error' : '' }}">
+			<textarea class="pavo-form-control required" name="comment_text" id="comment-text" placeholder="{{ text_comment_required }}">{{ comment_text }}</textarea>
+			{% if ( errors.comment_text ) %}
+				<p class="notice warning">{{ errors.comment_text }}</p>
+			{% endif %}
+		</div>
+	</div>
+	{% if ( logged_in == false ) %}
+		<div class="row">
+			<div class="col-md-6 col-xs-12 {{ errors.comment_name ? ' has-error' : '' }}">
+				<input type="text" name="comment_name" class="comment-name pavo-form-control required" placeholder="{{ text_display_name }}" value="{{ comment_name }}" />
+				{% if ( errors.comment_name ) %}
+					<p class="notice warning">{{ errors.comment_name }}</p>
+				{% endif %}
+			</div>
+			<div class="col-md-6 col-xs-12{{ errors.comment_email ? ' has-error' : '' }}">
+				<input type="email" name="comment_email" class="comment-email pavo-form-control required" placeholder="{{ text_email }}" value="{{ comment_email }}" />
+				{% if ( errors.comment_email ) %}
+					<p class="notice warning">{{ errors.comment_email }}</p>
+				{% endif %}
+			</div>
+		</div>
+	{% endif %}
+	<div class="row">
+		<div class="col-sm-12 col-xs-12 pull-left">
+			{% if ( captcha ) %}
+				<div class="g-recaptcha" data-sitekey="{{ captcha_api_key }}"></div>
+			{% endif %}
+			<p>
+				<input type="checkbox" name="comment_subscribe" /> {{ text_notify_follow_comment }}
+			</p>
+			<!-- <p>
+				<input type="checkbox" name="post_subscribe" /> {{ text_notify_new_post }}
+			</p> -->
+			<input type="hidden" name="comment_parent_id" value="0" />
+			<input type="hidden" name="comment_language_id" value="{{ language_id }}" />
+			<input type="hidden" name="comment_post_id" value="{{ post_id }}" />
+			<input type="hidden" name="comment_store_id" value="{{ comment_store_id }}" />
+			<p><button type="submit" id="comment-form-submit" class="pavo-btn-info">{{ text_submit_comment }}</button></p>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	(function($){
+		$( document ).on( 'submit', '#comment-form.google-recaptcha', function( e ) {
+			e.preventDefault();
+
+			return false;
+		} );
+	})(jQuery);
+</script>

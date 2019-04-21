@@ -1,0 +1,137 @@
+/**
+ * Module Layout Styles
+ *
+ */
+
+.panel-module{
+	.panel-heading{
+		.panel-title {
+			font-size: $font-size-h3 + 12;
+			color: $headings-color;
+			text-align: center;
+			font-weight: $headings-font-weight;
+			text-transform: uppercase;
+			position: relative;
+			font-family: $font-family-sans-serif;
+			padding-bottom: 50px;
+			&:after{
+	            background: transparent url("#{$image-theme-path}icon1.png") no-repeat scroll 0 0;
+	            content: "";
+	            width: 30px;
+	            height: 15px;
+	            left: 0;
+	            margin: auto;
+	            position: absolute;
+	            right: 0;
+	            bottom: 10px;
+	        }
+		}
+	}
+}
+
+.description-element {
+    text-align: center;
+    font-family: $font-family-serif;
+    font-size: $font-size-base + 2;
+    color: $theme-color-third;
+}
+
+.carousel-tabs {
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+.html-item {
+	text-align: center;
+	.c-img {
+		margin-bottom: 10px;
+	}
+}
+
+.icon-box {
+	.html-item {
+	 	.html-heading {
+	 		display: none;
+	 	}
+	}
+}
+
+.thumbnails {
+	overflow: auto;
+	clear: both;
+	list-style: none;
+	padding: 0;
+	margin: 0 0 0 -20px;
+    > li {
+		margin-left: 20px;
+	}
+	> img {
+		width: 100%;
+	}
+	.image-additional {
+		float: left;
+		margin-left: 20px;
+	}
+}
+.image-additional {
+	max-width: 78px;
+	a {
+		margin-bottom: 20px;
+		padding: 0px;
+		display: block;
+		border: 1px solid #ddd;
+	}
+}
+.thumbnail {
+	padding: 0px;
+}
+div.required {
+	.control-label {
+		&:before {
+		  color: #f00;
+		  content: "*";
+		  font-weight: bold; 
+		}
+	}
+}
+
+#checkout-checkout, #checkout-cart {
+	.panel-title {
+		font-size: $font-size-base;
+		color: $headings-color;
+		text-align: center;
+		font-weight: 500;
+		text-transform: uppercase;
+	}
+}
+.category-image {
+	padding-bottom: 10px;
+}
+
+/* slidelayer */
+.bannercontainer{
+    overflow: hidden;
+    &:hover{
+        .tp-rightarrow {
+            right: 25px !important;
+        }       
+        .tp-leftarrow{
+            left: 25px !important;
+        }
+    }
+}
+.tparrows {
+    position:absolute;
+    top:50% !important;
+    z-index:9999;
+    cursor:pointer;
+    display: block;
+    @include transition(all 0.3s ease-in-out 0s);
+
+}
+.tp-leftarrow {
+    left:-90px !important;
+}
+.tp-rightarrow {
+    right:-90px !important;
+}

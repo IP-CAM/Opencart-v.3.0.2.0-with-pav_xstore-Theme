@@ -1,0 +1,53 @@
+/* *
+*
+* pavtestimonial
+*
+*
+* */
+
+.testimonial-item  {
+	background-color: #6ac9bb;
+    text-align: center;
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 7px;
+    .t-avatar {
+    	position: absolute;
+	    top: -40px;
+	    left: 0;
+	    right: 0;
+	    margin: 0 auto;
+    }
+    .testimonial-info {
+    	color: #fff;
+	    font-size: 12px;
+	    margin: 0 auto;
+	    font-weight: 300;
+	    padding: 33px 70px 52px;
+	    line-height: 1.9em;
+	    .testimonial-profile {
+			display: flex;
+		    justify-content: center;
+		    flex-wrap: wrap;
+		    text-transform: uppercase;
+		    color: #212121;
+		    padding-top: 58px;
+		    .testimonials-name {
+				font-weight: 700;
+				text-transform: uppercase;
+				margin: 1px;
+				font-size: 12px;
+				color: #212121;
+				line-height: 1.7;
+				padding-right: 3px;
+		    }
+	    }
+	    .testimonial-description {
+	    	color: #fff;
+		    font-size: 12px;
+		    margin: 0 auto;
+		    font-weight: 300;
+		    line-height: 1.9em;
+	    }
+    }
+}    

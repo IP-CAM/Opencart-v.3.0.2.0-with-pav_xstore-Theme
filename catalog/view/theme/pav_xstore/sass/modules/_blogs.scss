@@ -1,0 +1,110 @@
+
+.box-content {
+	margin-bottom: 30px;
+}
+
+// npm run dev
+.pav-category, .tree-menu {
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+    }
+    > ul > li {
+        @include size(100%,auto);
+        position: relative;
+        border: 1px solid $border-color;
+        margin-bottom: -1px;
+        padding: 10px 15px;
+        @include transition(all 0.35s);   
+        &:last-child > a{
+            border:none;
+        }  
+        > a {
+            display: inline-block;
+            text-transform: capitalize;
+            color: $black;
+            @include transition(all 0.35s);
+            font-size: $font-size-base;
+            &:hover,&:focus{                    
+               color: $brand-primary;
+               @include rtl-padding-left(40px);
+            }   
+        }
+        a.active {
+            font-weight: bold;
+            color: $theme-color;
+            + ul {
+                display: block;
+                @include rtl-padding(0,0,10px,10px);
+            }
+        }
+        ul > li {
+            > a {
+                    text-decoration: none;
+                    display: block;
+                    padding: 15px;
+                    font-size: $font-size-base - 2;  
+                    
+                    &:hover{
+                        color: $theme-color;
+                    }
+                &.active {
+                    font-weight: bold;
+                    color:red;  
+                }
+            }
+        }
+	}
+}
+
+.pavblogs-comments-Latest {
+	.pav-comment {
+	  padding-bottom: 10px;
+	  border-bottom: 1px solid #E2E2E2; 
+	}
+}
+
+.related-title {
+    margin: 10px 0;
+    a {
+    	font-size: $font-size-base + 2;
+    }
+}
+
+
+/* pavoblog single */
+.pavoblog-posts,
+.pavoblog-post {
+    font-size: 15px;
+	font-family: $font-family-serif;
+    &.archive {
+        .entry-title {
+            height: auto;
+        }
+    }
+	&.single {
+		.entry-meta {
+			padding-bottom: 20px;
+			font-size: $font-size-base - 2 !important;
+			color: $brand-primary;
+			a {
+				text-transform: capitalize;
+				color: $brand-primary;
+			}
+		}
+		.addthis_toolbox {
+			padding-top: 20px;
+		}
+	}
+}
+.pavoblog-posts {
+    &.archive {
+        display: flex;
+        flex-flow: row wrap;
+    }
+}
+.pavoblog-post .entry-meta, .pavoblog-posts .entry-meta {
+    >div { float: left; margin-left: 0px !important;}
+}

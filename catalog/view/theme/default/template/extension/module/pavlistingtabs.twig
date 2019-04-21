@@ -1,0 +1,109 @@
+{% set id = random(1..9) + random() %}
+<div class="panel panel-default {{ module_class }}" id="module{{ id }}">
+    <div class="panel-heading">
+        {% if title %}<h3>{{ title }}</h3>{% endif %}
+        {% if message is not empty and message != '<p><br></p>' %}
+        <div class="module-desc">{{ message }}</div>
+        {% endif %}
+    </div>
+    <div class="panel-body">
+        <ul class="nav nav-tabs" id="listingtabs{{id}}">
+            {% for category in categories  if ((category is not empty) and category.products is not empty) %}
+            <li ><a href="#tab-{{ category.category_id }}{{ id }}" data-toggle="tab">{{ category.category_name}}</a></li>
+            {% endfor %}
+        </ul>
+        <div class="tab-content">
+            {% for category in categories %}
+            <div class="swiper-container tab-pane fade {% if category.products|length <= itemsperpage*cols %}swiper-no-swiping{% endif %}" id="tab-{{ category.category_id }}{{ id }}">
+                <div class="swiper-wrapper ">
+                    {% for product in category.products if(product is not empty) %}
+                    <div class="swiper-slide ">
+                        <div class="product-layout product-thumb product-inner">
+                            {% if product.thumb %}
+                            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive"/></a></div>
+                            {% endif %}
+                            <div class="caption">
+                                <div class="name"><h4><a href="{{ product.href }}">{{ product.name }}</a></h4></div>
+                                <div class="description">
+                                    {{ (product.description|striptags)|slice(0,58) }}...
+                                </div>
+                                {% if product.price %}
+                                <div class="price">
+                                    {% if not product.special %}
+                                    {{ product.price }}
+                                    {% else %}
+                                    <span class="price-old">{{ product.price }}</span> <span class="price-new">{{ product.special }}</span>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                                {% if product.rating %}
+                                <div class="rating">
+                                    {% set i = 1 %}{% for i in i..5 %}
+                                    {% if product.rating < i %}
+                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                    {% else %}
+                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="button-group">
+                                <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
+                                <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+                                <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-pager">
+                    <div class="swiper-button-next swiper-button-next{{id}}"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#listingtabs{{id}} a:first').tab('show');
+    });
+    var tabs = {};
+    $('#listingtabs{{id}} a').on('shown.bs.tab',function ( e ) {
+        e.preventDefault();
+        var id = e.currentTarget.hash.replace( '#tab-', '' );
+        if ( typeof tabs[id] !== 'undefined' || tabs[id] == true )
+            return;
+        $('#tab-'+id).swiper({
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            pause: 'hover',
+            loop:{{ loop ? loop : 'false' }},
+            autoplay:{{ auto_play_mode == "true" ? interval:'false' }},
+            slidesPerView: {{ itemsperpage ? itemsperpage : 2 }},
+            slidesPerColumn: {{ cols ? cols : 1 }},
+            noSwipingClass: 'swiper-no-swiping',
+            spaceBetween: 5,
+            onReachEnd:function(swiper){
+                $('.swiper-button-next{{id}}').one('click',function () {
+                    swiper.slideTo(0, 800, false);
+                });
+            },
+            breakpoints: {
+                767: {
+                    slidesPerView: 1,
+                    noSwiping: false
+                },
+                991: {
+                    slidesPerView: 2,
+                    noSwiping: false
+                }, 
+            }
+        });
+        tabs[id] = true;
+        return false;
+    });
+</script>

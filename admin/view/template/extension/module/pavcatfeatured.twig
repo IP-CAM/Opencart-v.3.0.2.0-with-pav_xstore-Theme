@@ -1,0 +1,298 @@
+{{ header }}{{ column_left }}
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="pull-right">
+				<button type="submit" form="form-banner" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Save"><i class="fa fa-save"></i></button>
+				
+				{% if module_id is defined %}
+				<a onclick="confirm('Are you sure delete?') ? location.href='{{ delete }}' : false;" data-toggle="tooltip" title="" class="btn btn-danger"><i class="fa fa-minus-circle"></i></a>
+				{% endif %}
+
+				<a class="btn btn-default" href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}"><i class="fa fa-reply"></i></a>
+			</div>
+			<h1>{{ heading_title }}</h1>
+		    <ul class="breadcrumb">
+		        {% for breadcrumb in breadcrumbs %}
+		        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		        {% endfor %}
+		    </ul>
+		</div>
+	</div><!-- End div#page-header -->
+
+	<div id="page-content" class="container-fluid">
+		{% if error_warning %}
+	    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+	      <button type="button" class="close" data-dismiss="alert">&times;</button>
+	    </div>
+	    {% endif %}
+
+		{% if success %}
+		<div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i>{{ heading_title }}</h3>
+			</div>
+			<div class="panel-body">
+				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-latest" class="form-horizontal">
+					<div class="tab-pane">
+						
+						<div class="tab-content">
+
+							<ul class="nav nav-tabs">
+								{% if extensions is defined %}
+									{% for extension in extensions %}
+										{% if module_id is empty %} {% set actived = 'class="active"' %} {% else %} {% set actived = '' %} {% endif %}
+										<li {{ actived }}><a href="{{ extension.edit }}" ><i class="fa fa-plus-circle"></i>{{ extension.name }}</a></li>
+										
+										{% set i = 0 %}
+										{% for m in extension.module %} {% set i = i + 1 %}
+										{% if m.module_id == module_id %} {% set active = 'class="active"' %} {% else %} {% set active = '' %} {% endif %}
+										<li {{ active }}><a href="{{ m.edit }}" ><i class="fa fa-plus-circle"></i>{{ m.name }}</a></li>
+										{% endfor %}
+									{% endfor %}
+								{% endif %}
+							</ul>
+						
+							<table class="table">
+								<tr>
+									<td class="col-sm-2 control-label">{{ text_layout_style }}</td>
+									<td class="col-sm-10">
+										<select name="layout_style[styles]" id="input-layout-style" class="form-control">
+							               	{% for key,style in styles %}
+							                <option value="{{ key }}" {% if key == layout_style.styles %} selected="selected" {% endif %}>{{ style }}</option>
+							               	{% endfor %}
+							            </select>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-sm-2 control-label">{{ entry_module_name }}</td>
+									<td class="col-sm-10"><input class="form-control" style="width:55%;" name="name" value="{{ name }}" placeholder="{{ entry_module_name }}"/></td>
+								</tr>
+								<tr>
+									<td class="col-sm-2 control-label">{{ entry_description_show }}</td>
+									<td class="col-sm-10">
+										<select name="display_desc" id="input-display-desc" class="form-control">
+											<option value="1"{% if 1 == display_desc %} selected="selected" {% endif %}>{{ text_yes }}</option>
+											<option value="0"{% if 0 == display_desc %} selected="selected" {% endif %}>{{ text_no }}</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-sm-2 control-label">{{ entry_module_title }}</td>
+									<td class="col-sm-10">
+										<select class="form-control nostyle" name="titles" id="input-title" class="form-control">
+                                            {% if titles %}
+												<option value="1" selected="selected">{{ text_enabled }}</option>
+												<option value="0">{{ text_disabled }}</option>
+                                            {% else %}
+												<option value="1">{{ text_enabled }}</option>
+												<option value="0" selected="selected">{{ text_disabled }}</option>
+                                            {% endif %}
+										</select>
+									</td>
+								</tr>
+
+								<tr>
+									<td class="col-sm-2 control-label">{{ entry_module_title }}</td>
+									<td class="col-sm-10">
+										{% for language in languages %}
+										<div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+                        				<input type="text" name="module_infor[{{ language.language_id }}][title]" value="{{ module_infor[language.language_id] ? module_infor[language.language_id].title }}" placeholder="{{ entry_module_title }}" class="form-control" />
+                      					</div>
+										{% endfor %}
+									</td>
+								</tr>
+
+								<tr>
+									<td class="col-sm-2 control-label">{{ entry_module_description }}</td>
+									<td class="col-sm-10">
+										{% for language in languages %}
+										<div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+                        				<input type="text" name="module_infor[{{ language.language_id }}][description]" value="{{ module_infor[language.language_id] ? module_infor[language.language_id].description }}" placeholder="{{ entry_module_desription }}" class="form-control" />
+                      					</div>
+										{% endfor %}
+									</td>
+								</tr>
+								<tr>
+									<td class="col-sm-2 control-label">{{ entry_show_img }}</td>
+									<td class="col-sm-10">
+										<select class="form-control nostyle" name="showimg" id="input-status" class="form-control">
+											{% if showimg %}
+							                <option value="1" selected="selected">{{ text_enabled }}</option>
+							                <option value="0">{{ text_disabled }}</option>
+							                {% else %}
+							                <option value="1">{{ text_enabled }}</option>
+							                <option value="0" selected="selected">{{ text_disabled }}</option>
+							                {% endif %}
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-sm-2 control-label">{{ entry_status }}</td>
+									<td class="col-sm-10">
+										<select class="form-control nostyle" name="status" id="input-status" class="form-control">
+											{% if status %}
+											<option value="1" selected="selected">{{ text_enabled }}</option>
+											<option value="0">{{ text_disabled }}</option>
+											{% else %}
+											<option value="1">{{ text_enabled }}</option>
+											<option value="0" selected="selected">{{ text_disabled }}</option>
+											{% endif %}
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-sm-2 control-label">{{text_auto_play}}</td>
+									<td class="col-sm-10">
+										<select class="form-control nostyle" name="auto_play" id="input-auto_play" class="form-control">
+                                            {% if auto_play %}
+												<option value="1" selected="selected">{{text_enabled}}</option>
+												<option value="0">{{text_disabled}}</option>
+                                            {% else %}
+												<option value="1">{{text_enabled}}</option>
+												<option value="0" selected="selected">{{text_disabled}}</option>
+                                            {% endif %}
+										</select>
+									</td>
+								</tr>
+
+								<tr>
+									<td class="col-sm-2 control-label">{{ text_interval }}</td>
+									<td class="col-sm-10"><input  name="interval" value="{{interval}}"  class="form-control" style="width:55%;"/></td>
+								</tr>
+								<tr>
+									<td class="col-sm-2 control-label">{{entry_slidesperview}}</td>
+									<td class="col-sm-10"><input  name="perview" value="{{perview}}"   class="form-control" style="width: 55%;">
+								</tr>
+								<tr>
+									<td class="col-sm-2 control-label">{{entry_rows}}</td>
+									<td class="col-sm-10"><input  name="rows" value="{{rows}}"   class="form-control" style="width: 55%;">
+								</tr>
+
+								<tr>
+									<td class="col-sm-2 control-label">{{entry_loop}}</td>
+									<td class="col-sm-10">
+										<select class="form-control nostyle" name="loop" id="input-loop" class="form-control" >
+                                            {% if loop %}
+												<option value="1" selected="selected">{{text_enabled}}</option>
+												<option value="0">{{text_disabled}}</option>
+                                            {% else %}
+												<option value="1">{{text_enabled}}</option>
+												<option value="0" selected="selected">{{text_disabled}}</option>
+                                            {% endif %}
+										</select>
+									</td>
+								</tr>
+
+
+								<tr>
+									<td class="col-sm-2 control-label">{{ entry_img_width }}</td>
+									<td class="col-sm-10"><input class="form-control" style="width:55%;" name="img_width" value="{{ img_width }}" placeholder="{{ entry_img_width }}"/></td>
+								</tr>
+								<tr>
+									<td class="col-sm-2 control-label">{{ entry_img_height }}</td>
+									<td class="col-sm-10"><input class="form-control" style="width:55%;" name="img_height" value="{{ img_height }}" placeholder="{{ entry_img_height }}"/></td>
+								</tr>
+
+								<tr>
+									<td class="col-sm-2 control-label">{{ entry_prefix_class }}</td>
+									<td class="col-sm-10"><input class="form-control" style="width:55%;" name="prefix" value="{{ prefix }}"/></td>
+								</tr>
+							</table>
+							<div class="table-responsive">
+								<table id="attribute" class="table table-striped table-bordered table-hover">
+									<thead>
+										<tr>
+											<td class="text-left">Image Icon</td>
+											<td class="text-left">Icon-Font</td>
+											<td class="text-left">Category name</td>
+											<td class="text-left">Class</td>
+											<td></td>
+										</tr>
+									</thead>
+								<tbody>
+									{% set attribute_row = 0 %}
+									{% for category_featured in categories_featured %}
+									<tr id="attribute-row{{ attribute_row }}">
+										{% if category_featured.thumb %} {% set thumb = category_featured.thumb %} {% else %} {% set thumb = placeholder %} {% endif %}
+										<td class="text-left">
+											<a style="background-color: black" href="" id="thumb-image{{ attribute_row }}" data-toggle="image" class="img-thumbnail"><img src="{{ thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+											<input type="hidden" name="categories_featured[{{ attribute_row }}][image]" value="{{ category_featured.image }}" id="input-image{{ attribute_row }}" />
+										</td>
+                
+										<td class="text-left">
+											<input type="text" name="categories_featured[{{ attribute_row }}][icon]" value="{{ category_featured.icon }}" class="form-control" />
+										</td>
+										<td class="text-left">
+											<select class="form-control" name="categories_featured[{{ attribute_row }}][id]">
+												{% for category in categories %}
+													{% if category_featured.id == category.category_id %} {% set selected = 'selected="selected"' %} {% else %} {% set selected = '' %} {% endif %}
+													<option {{ selected }} value="{{ category.category_id }}">{{ category.name }}</option>
+												{% endfor %}
+											</select>
+										</td>
+
+										<td class="text-left" style="width: 40%;">
+											<input type="text" name="categories_featured[{{ attribute_row }}][class]" value="{{ category_featured.class }}" class="form-control" />
+										</td>
+
+										<td class="text-left"><button type="button" onclick="$('#attribute-row{{ attribute_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+									</tr>
+									{% set attribute_row = attribute_row + 1 %}
+									{% endfor %}
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="2"></td>
+										<td class="text-left"><button type="button" onclick="addAttribute();" data-toggle="tooltip" title="{{ button_attribute_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+									</tr>
+								</tfoot>
+								</table>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div><!-- end div content form -->
+
+		</div>
+	</div><!-- End div#page-content -->
+
+</div><!-- End div#content -->
+<style type="text/css">
+	.nostyle { width: 36%; }
+</style>
+<script type="text/javascript"><!--
+var attribute_row = {{ attribute_row }};
+
+function addAttribute() {
+    html  = '<tr id="attribute-row' + attribute_row + '">';
+	// Image
+     html += '  <td class="text-left"><a style="background-color: black" href="" id="thumb-image' + attribute_row + '" data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a><input type="hidden" name="categories_featured[' + attribute_row + '][image]" value="" id="input-image' + attribute_row + '" /></td>';
+	// icon
+	html += '  <td class="text-left" style="width: 20%;"><input type="text" name="categories_featured[' + attribute_row + '][icon]" value="" class="form-control" /></td>';
+	// name
+	html += '  <td class="text-left">';
+	html += '  	<select class="form-control" name="categories_featured[' + attribute_row + '][id]">';
+					{% for category in categories %}
+	html += '  		<option value="{{ category.category_id }}">{{ category.name }}</option>';
+					{% endfor %}
+	html += '  </select>';
+	html += '  </td>';
+	// class
+	html += '  <td class="text-left"><input type="text" name="categories_featured[' + attribute_row + '][class]" value="" class="form-control" /></td>';
+	//submit
+	html += '  <td class="text-left"><button type="button" onclick="$(\'#attribute-row' + attribute_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+    html += '</tr>';
+	
+	$('#attribute tbody').append(html);
+	
+	attribute_row++;
+}
+//--></script>
+{{ footer }}

@@ -1,0 +1,28 @@
+{% if ( comment and comment.comment_parent_id == parent_id ) %}
+	<li class="comment row" data-comment="{{ comment.comment_id }}">
+		<div class="media-left">
+			<img src="http://www.gravatar.com/avatar/" alt="{{ comment.comment_name }}" />
+		</div>
+		<div class="comment-wrap media-right">
+			<div class="comment-meta">
+				<span class="comment-postedby">
+					<strong>{{ comment.comment_name }}</strong>
+				</span>
+				<span class="comment-date">
+					<time>{{ comment.date_added | date( [ date_format, ' ', time_format ] | join() ) }}</time>
+				</span>
+			</div>
+			{% if comment.comment_text %}
+				<div class="comment-text">
+					{{ comment.comment_text }}
+				</div>
+				{% if can_reply %}
+					<p>
+						<a href="#" class="reply-comment"><i class="fa fa-reply"></i> {{ text_reply }}</a>
+					</p>
+					{% include 'pavoblog/comment/comment-list.twig' with { 'parent_id' : comment.comment_id, 'comments' : comments } %}
+				{% endif %}
+			{% endif %}
+		</div>
+	</li>
+{% endif %}

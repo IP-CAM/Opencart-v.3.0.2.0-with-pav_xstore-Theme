@@ -1,0 +1,69 @@
+{% set id = random(1..9) + random() %}
+{% if categories is defined %}
+<div class="box box-normal categoryfeature {{ prefix }}">
+	{% if titles == 1 %}
+	<h4 class="panel-title">{{ box_heading }}</h4>
+	{% endif %}
+ 	<span class="desciption-title">{{ description }}</span>
+	<div class="{% if categories|length <= perview*rows %}swiper-no-swiping{% endif %}">
+	<div class="swiper-container swiper-containers" id="catfeatured{{id}}">
+		<div class="swiper-wrapper">
+			{% for category in categories %}
+			<div class="swiper-slide">	
+				<div class="product-thumb transition">
+					<div class="effect-v6">
+						<div class="image">
+							{% if showimg %}
+							<i class="{{ category.icon }}"></i>
+							{% else %}
+							<a href="{{ category.href }}">
+								<img class="img-responsive" src="{{ category.thumb }}" alt="{{ category.name }}" title="{{ category.name }}"/>
+							</a>
+							{% endif %}
+							<div class="caption text-align">
+								<h4><a href="{{ category.href }}">{{ category.name }}</a></h4>
+								<div class="category-items"><a class="text-lighten" href="{{ category.href }}">{{ category.items }}</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{% endfor %}
+		</div>
+		<div class="swiper-pager">
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+		</div>
+	</div>
+</div>
+</div>
+{% endif %}
+<script type="text/javascript"><!--
+$('.swiper-containers').swiper({
+    pause: 'hover',
+	nextButton: '.swiper-button-next',
+	prevButton: '.swiper-button-prev',
+	slidesPerView: {{ perview ? perview : 2}},
+	loop:{{ loop ? loop : 'false' }},
+    autoplay:{{ auto_play_mode ? interval:'false' }},
+    noSwipingClass: 'swiper-no-swiping',
+	slidesPerColumn:{{ rows ? rows : 1}},
+
+
+	breakpoints: {
+    767: {
+      slidesPerView: 1,
+      {% if categories|length > 1*rows %}
+      noSwiping: false
+      {% endif %}
+    },
+    991: {
+      slidesPerView: 2,
+      {% if categories|length > 2*rows %}
+      noSwiping: false
+      {% endif %}
+    }, 
+  }
+});
+--></script> 

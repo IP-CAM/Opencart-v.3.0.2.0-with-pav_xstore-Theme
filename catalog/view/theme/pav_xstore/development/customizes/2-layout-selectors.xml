@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<customizes>
+	<author>pavotheme</author>
+	<label>Layout Selectors</label>
+	<id>layout_selectors</id>
+
+	<item>
+		<id>header</id>
+		<label>Header</label>
+		<item>
+			<id>topbar</id>
+			<label>Topbar</label>
+			<item>
+				<label>Font Family</label>
+				<id>header_font_family</id>
+				<type>select_font</type>
+			</item>
+			<item>
+				<label>Font Size</label>
+				<id>header_font_size</id>
+				<type>select_font_size</type>
+			</item>
+			<item>
+				<label>Link color</label>
+				<id>header_link_color</id>
+				<type>select_color</type>
+			</item>
+		</item>
+		<item>
+			<id>menu</id>
+			<label>Menu</label>
+			<item>
+				<label>Font Family</label>
+				<id>menu_font_family</id>
+				<type>select_font</type>
+			</item>
+			<item>
+				<label>Font Size</label>
+				<id>menu_font_size</id>
+				<type>select_font_size</type>
+			</item>
+			<item>
+				<label>Link color</label>
+				<id>menu_link_color</id>
+				<type>select_color</type>
+			</item>
+		</item>
+	</item>
+	<item>
+		<label>Body</label>
+		<id>body</id>
+		<item>
+			<label>Background Color</label>
+			<id>body_background_color</id>
+			<type>select_color</type>
+		</item>
+		<item>
+			<label>Background Image</label>
+			<id>body_background_image</id>
+			<type>select_background_image</type>
+		</item>
+		<item>
+			<label>Font Family</label>
+			<id>body_font_family</id>
+			<type>select_font</type>
+		</item>
+		<item>
+			<label>Font Size</label>
+			<id>body_font_size</id>
+			<type>select_font_size</type>
+		</item>
+		<item>
+			<label>Link color</label>
+			<id>body_link_color</id>
+			<type>select_color</type>
+		</item>
+	</item>
+	<item>
+		<label>Footer</label>
+		<id>footer</id>
+		<item>
+			<label>Font Family</label>
+			<id>footer_font_family</id>
+			<type>select_font</type>
+		</item>
+		<item>
+			<label>Font Size</label>
+			<id>footer_font_size</id>
+			<type>select_font_size</type>
+		</item>
+		<item>
+			<label>Link color</label>
+			<id>footer_link_color</id>
+			<type>select_color</type>
+		</item>
+	</item>
+</customizes>

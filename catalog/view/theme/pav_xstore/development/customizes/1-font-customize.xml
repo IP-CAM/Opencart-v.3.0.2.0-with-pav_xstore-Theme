@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<customizes>
+	<author>pavotheme</author>
+	<label>Fonts Customize</label>
+	<id>font_customize</id>
+
+	<item>
+		<label>Enable</label>
+		<id>enable</id>
+		<type>select</type>
+		<default>0</default>
+		<option>
+			<text>No</text>
+			<value>0</value>
+		</option>
+		<option>
+			<text>Yes</text>
+			<value>1</value>
+		</option>
+	</item>
+	<item>
+		<id>body_font_settings</id>
+		<label>Body Font</label>
+		<item>
+			<type>select_font</type>
+			<id>body_font</id>
+			<label>Select Font</label>
+		</item>
+		<item>
+			<type>select_font_weight</type>
+			<id>font_weight</id>
+			<label>Font Weight</label>
+		</item>
+	</item>
+</customizes>
