@@ -99,7 +99,7 @@ class ControllerApiAppCustomer extends Controller {
 				$customer_id = $this->model_account_customer->addCustomer($data);
 				$json = array('success'=>'1', 'message'=>"Sign Up successfully!") ;
 			}else{
-				$json = array('success'=>'0', 'message'=>"Sign Up Error !");
+				$json = array('success'=>'0', 'message'=>"Sign Up Error !" . json_encode($json));
 			}
 
 		}
